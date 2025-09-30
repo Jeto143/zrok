@@ -7,7 +7,7 @@ FROM ${ZROK_CLI_IMAGE}:${ZROK_CLI_TAG}
 USER root
 
 # install envsubst
-RUN   INSTALL_PKGS="gettext" && \
+RUN   INSTALL_PKGS="gettext util-linux" && \
       microdnf -y update --setopt=install_weak_deps=0 --setopt=tsflags=nodocs && \
       microdnf -y install --setopt=install_weak_deps=0 --setopt=tsflags=nodocs ${INSTALL_PKGS}
 
