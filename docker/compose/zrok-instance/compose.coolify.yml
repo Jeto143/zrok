@@ -47,6 +47,8 @@ services:
       timeout: 3s
       retries: 5
       start_period: 30s
+    labels:
+      - dev.dozzle.group=zrok
 
   zrok-controller:
     depends_on:
@@ -88,6 +90,13 @@ services:
       ZROK_USER_EMAIL: ${ZROK_USER_EMAIL}  # login email address (initial user account)
       ZROK_ADMIN_TOKEN: ${ZROK_ADMIN_TOKEN} # zrok controller admin password
       ZROK_API_ENDPOINT: http://zrok-controller:${ZROK_CTRL_PORT:-18080} # bridge address of the zrok controller
+    labels:
+      - dev.dozzle.group=zrok
+      - homepage.group=System & Infrastructure
+      - homepage.name=zrok
+      - homepage.icon=https://tunnels.jeto.dev/zrok.png
+      - homepage.href=https://tunnels.jeto.dev
+      - homepage.description=Secure tunneling
 
   zrok-frontend:
     depends_on:
@@ -149,6 +158,7 @@ services:
       - traefik.http.routers.http-zrok-frontend-router.rule=HostRegexp(`^.+\.tunnel\.jeto\.dev$`)
       - traefik.http.routers.http-zrok-frontend-router.entryPoints=http
       - traefik.http.routers.http-zrok-frontend-router.middlewares=redirect-to-https
+      - dev.dozzle.group=zrok
 
 volumes:
   ziti_home:  # this will not be used if you switch from named volume to bind mount volume
