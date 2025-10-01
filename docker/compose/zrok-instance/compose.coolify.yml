@@ -76,10 +76,6 @@ services:
     user: root
     volumes:
       - zrok_ctrl:/var/lib/zrok-controller
-    networks:
-      zrok-instance:
-        aliases:
-          - zrok.${ZROK_DNS_ZONE}
     restart: unless-stopped
     expose:
       - ${ZROK_CTRL_PORT:-18080}  # (not published)
